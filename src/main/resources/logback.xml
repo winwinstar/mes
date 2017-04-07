@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <property name="LOG_HOME" value="${catalina.base}/logs"/>
+    <property name="PROJECT_NAME" value="Mes"/>
+
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[${PROJECT_NAME}][%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5level [%F:%L] | %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Rolling file log -->
+    <appender name="defaultLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${PROJECT_NAME}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${PROJECT_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>1</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>[${PROJECT_NAME}][%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread]%-5level[%F:%L]|%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="console" />
+        <appender-ref ref="defaultLogFile" />
+    </root>
+</configuration>
